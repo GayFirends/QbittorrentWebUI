@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QbittorrentWebUI.MainPage"
+             Title="qBittorrent WebUI">
+    <StackLayout Padding="10">
+        <Label Text="服务器地址:" />
+        <Entry x:Name="urlEntry" Placeholder="http://localhost:8080" />
+
+        <Label Text="用户名:" />
+        <Entry x:Name="usernameEntry" Placeholder="用户名" />
+
+        <Label Text="密码:" />
+        <Entry x:Name="passwordEntry" Placeholder="密码" IsPassword="True" />
+
+        <Button Text="连接" Clicked="OnConnectButtonClicked" />
+
+        <Label x:Name="resultLabel" Text="" />
+
+        <ScrollView>
+            <CollectionView x:Name="torrentsCollectionView" SelectionMode="Single" SelectionChanged="OnTorrentsSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical" Padding="5" Margin="5" BackgroundColor="LightGray">
+                            <Label Text="{Binding name}" FontSize="Medium" />
+                            <Label Text="{Binding num_seeds, StringFormat='用户数: {0}'}" />
+                            <Label Text="{Binding progress, StringFormat='进度: {0:P}'}" />
+                            <Label Text="{Binding dl_speed, StringFormat='下载速度: {0} KB/s'}" />
+                            <Label Text="{Binding up_speed, StringFormat='上传速度: {0} KB/s'}" />
+                            <ProgressBar Progress="{Binding progress}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
